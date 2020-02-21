@@ -68,13 +68,13 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
 
 ### HTTP Request
 
-`GET https://eth-mainnet.api.coinbase.com/v1/getTokenBalances?`
+`GET https://eth-mainnet.api.coinbase.com/v1/api_key?`
 
 ### DATA
 
 | Parameter | Type     | Description                                         |
 | --------- | -------- | --------------------------------------------------- |
-| address \*       | _string_ | The address (20 bytes) to check for balance                                |
+| address \*       | _string_ | The address (20 characters) to check for balance                                |
 | tokens \*    | [_strings_] | Token(s) from the [table](#erc20-tokens) that we support by name               |
 
 <aside class="notice">
@@ -88,8 +88,85 @@ Note: All parameters with a * are requried
 
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
-| address     | string | The address for which token balances were checked |
+| address     | _string_ | The address for which token balances were checked (20 characters) |
 | tokenBalances | [Object] | Returns an array of token balance objects. Each object has a `tokenName` field that is a `string` and a `tokenBalance` field, which is either `decimal` or `null` (if no token balance exists) |                              
 | blockNumber     | integer | The token balances are calculated as of this block |
 | blockTimestamp | integer | The unix timestamp for when the block was mined |
 
+
+## Token Transfers
+
+This endpoint returns the token transfers for a specific transaction hash
+
+
+```shell
+curl https://eth-mainnet.api.coinbase.com/v1/api_key \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"get_tokenTrasnfersByHash","params":["transactionHash":"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"]],"id":7}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 7,
+  "result": 
+    {
+      "transactionHash": "0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838",
+      "tokenTransfers": 
+      [
+        {
+          "from":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", 
+          "to": "0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD",
+          "tokenName":"mkr",
+          "tokenContract":"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90",
+          "value":223, 
+          "logIndex":3
+        }
+      ],
+      "blockNumber": 7909779,
+      "blockTimestamp": 1559879572
+    }
+}
+```
+
+
+### HTTP Request
+
+`GET https://eth-mainnet.api.coinbase.com/v1/api_key?`
+
+### DATA
+
+| Parameter | Type     | Description                                         |
+| --------- | -------- | --------------------------------------------------- |
+| transactionHash \*       | _string_ | String representing the hash (32 characters) of the transaction                               |
+
+<aside class="notice">
+Note: All parameters with a * are requried
+</aside>
+
+
+### Response Overview
+
+**`Data Object`**
+
+| Field      | Type      | Description                                                                                               |
+| ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
+| transactionHash     | string | The hash of the transaction (32 characters) |
+| tokenTransfers | [Object] | Returns an array of token transfer objects (definition below) |                              
+| blockNumber     | integer | The token balances are calculated as of this block |
+| blockTimestamp | integer | The unix timestamp for when the block was mined |
+
+
+**`tokenTransfers Object`**
+
+| Field      | Type      | Description                                                                                               |
+| ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
+| from     | string | Address of the sender (20 characters) |
+| to | string| Address of the receiver (20 characters) |                              
+| tokenName     | string | Name of the token |
+| tokenContract | string | Address of the token contract string |
+| value | decimal | Value of the tokens transferred|
+| logIndex | integer | integer of the position in the block, useful when there are multiple transfers in one transaction. null when its pending log |
