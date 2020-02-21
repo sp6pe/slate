@@ -48,7 +48,7 @@ This endpoint returns the token balances for a specific address given a list of 
 
 
 ```shell
-curl https://eth-mainnet.api.coinbase.com/v1/api_key \
+curl https://eth-mainnet.api.coinbase.com/v1/API-KEY \
 -X POST \
 -H "Content-Type: application/json" \
 -d '{"jsonrpc":"2.0","method":"get_tokenBalances","params":{"address":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", "tokens":["mkr", "dai", "zrx"]},"id":7}'
@@ -77,10 +77,6 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
 }
 ```
 
-
-### HTTP Request
-
-`GET https://eth-mainnet.api.coinbase.com/v1/api_key?`
 
 ### DATA
 
@@ -149,9 +145,7 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
 ```
 
 
-### HTTP Request
 
-`GET https://eth-mainnet.api.coinbase.com/v1/api_key?`
 
 ### DATA
 
@@ -239,9 +233,6 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
 ```
 
 
-### HTTP Request
-
-`GET https://eth-mainnet.api.coinbase.com/v1/api_key?`
 
 ### DATA
 
@@ -276,3 +267,10 @@ Note: All parameters with a * are requried
 | transactionHash     | integer | String representing the hash (32 characters) of the transaction |
 | blockNumber     | integer | The block in which the token transfers occured |
 | blockTimestamp | integer | The unix timestamp for when the block was mined |
+
+
+## Token Balance at Block
+
+## Token Metadata
+
+## Token Allowance
