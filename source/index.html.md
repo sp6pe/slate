@@ -20,7 +20,7 @@ search: true
 
 # Introduction
 
-Coinbase provides a simple, fast, and reliable REST API for Ethereum developers. We know it's hard to build on Ethereum, and that's why we've built enhanced endpoints that make key tasks trivial 
+Coinbase provides a simple, fast, and reliable API for Ethereum developers. We know it's hard to build on Ethereum, and that's why we've built enhanced endpoints that make key tasks trivial 
 
 This API reference provides information on available endpoints and how to interact with them.
 
