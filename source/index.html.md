@@ -11,7 +11,6 @@ toc_footers:
 
 includes:
   - tokens
-  - kittens
   - errors
 
 
@@ -20,18 +19,40 @@ search: true
 
 # Introduction
 
-Coinbase provides a simple, fast, and reliable API for Ethereum developers. We know it's hard to build on Ethereum, and that's why we've built enhanced endpoints that make key tasks trivial 
+Coinbase provides a simple, fast, and reliable **JSON-RPC API** for Ethereum developers. We know it's hard to build on Ethereum, and that's why we've built powerful endpoints that make key tasks trivial 
 
 This API reference provides information on available endpoints and how to interact with them.
 
+
+
 # Authentication
 
-To use the Coinbase Enhanced API, you need an API key to authenticate your requests. To obtain your API key contact us [here](https://developers.coinbase.com/).
+```shell
+curl https://eth-mainnet.api.coinbase.com/v1/api_key \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":3}'
+```
 
-The Coinbase Enhanced API expects for the API key to be included in the Authorization header or in the URL parameters like: `api_key=API_KEY`
+
+> Results:
+
+```json
+{
+
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": "0x65a8db"
+}
+```
+
+To use the Coinbase ETH API, you need an API key to authenticate your requests. To obtain your API key contact us [here](https://developers.coinbase.com/).
+
+The API is designed according to the [JSON-RPC](https://www.jsonrpc.org/specification) standards 
+
+###HTTP Request
+`curl https://<network>.api.coinbase.com/v1/api_key`
 
 <aside class="notice">
-You must replace <code>API_KEY</code> with your personal API key.
+Replace `api_key` with your unique api_key
 </aside>
-
-

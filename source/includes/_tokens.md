@@ -38,15 +38,19 @@ This endpoint returns the token balances for a specific address given a list of 
 
 
 ```shell
-curl 
-"https://eth-mainnet.api.coinbase.com/v1/getTokenBalances?address=0xecA41677558025c76BfD20e9289283cb4Ca85f46&tokens=mkr,dai,zrx&api_key=API_KEY"
+curl https://eth-mainnet.api.coinbase.com/v1/api_key \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"get_tokenBalances","params":["address":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", "tokens":["mkr", "dai", "zrx"]],"id":7}'
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "data": 
+  "jsonrpc": "2.0",
+  "id": 7,
+  "result": 
     {
       "address": "0xecA41677558025c76BfD20e9289283cb4Ca85f46",
       "tokenBalances": 
@@ -55,12 +59,9 @@ curl
         {"tokenName":"dai", "tokenBalance": null},
         {"tokenName":"zrx","tokenBalance": 323.33}
       ],
-    },
-  "meta": 
-  {
-    "blockNumber": 7909779,
-    "blockTimestamp": 1559879572
-  }
+      "blockNumber": 7909779,
+      "blockTimestamp": 1559879572
+    }
 }
 ```
 
@@ -69,11 +70,10 @@ curl
 
 `GET https://eth-mainnet.api.coinbase.com/v1/getTokenBalances?`
 
-### Query Parameters
+### DATA
 
 | Parameter | Type     | Description                                         |
 | --------- | -------- | --------------------------------------------------- |
-| api_key \*       | _string_ | Your unique API key                                 |
 | address \*       | _string_ | The address (20 bytes) to check for balance                                |
 | tokens \*    | [_strings_] | Token(s) from the [table](#erc20-tokens) that we support by name               |
 
@@ -89,12 +89,7 @@ Note: All parameters with a * are requried
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
 | address     | string | The address for which token balances were checked |
-| tokenBalances | [Object] | Returns an array of token balance objects. Each object has a `tokenName` field that is a `string` and a `tokenBalance` field, which is either `decimal` or `null` (if no token balance exists) |
-
-**`Meta Object`**
-
-| Field      | Type      | Description                                                                                               |
-| ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
+| tokenBalances | [Object] | Returns an array of token balance objects. Each object has a `tokenName` field that is a `string` and a `tokenBalance` field, which is either `decimal` or `null` (if no token balance exists) |                              
 | blockNumber     | integer | The token balances are calculated as of this block |
 | blockTimestamp | integer | The unix timestamp for when the block was mined |
 
