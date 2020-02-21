@@ -196,25 +196,22 @@
   color: #f92672;
 }
     </style>
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all.js"></script>
+    <link href="stylesheets/screen-a1ce949a.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-bccf8c07.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-c5541673.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" alt="Navbar" />
+        <img src="images/navbar-cad8cdcb.png" alt="Navbar" />
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
+      <img src="images/cb-32d185ad.png" class="logo" alt="Cb" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -226,18 +223,32 @@
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#http-request" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#erc20-tokens" class="toc-h1 toc-link" data-title="ERC20 Tokens">ERC20 Tokens</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#token-balances" class="toc-h2 toc-link" data-title="Token Balances">Token Balances</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#token-transfers" class="toc-h2 toc-link" data-title="Token Transfers">Token Transfers</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#token-transfers-by-address" class="toc-h2 toc-link" data-title="Token Transfers by Address">Token Transfers by Address</a>
+                  </li>
+                  <li>
+                    <a href="#token-balance-at-block" class="toc-h2 toc-link" data-title="Token Balance at Block">Token Balance at Block</a>
+                  </li>
+                  <li>
+                    <a href="#token-metadata" class="toc-h2 toc-link" data-title="Token Metadata">Token Metadata</a>
+                  </li>
+                  <li>
+                    <a href="#token-allowance" class="toc-h2 toc-link" data-title="Token Allowance">Token Allowance</a>
                   </li>
               </ul>
           </li>
@@ -247,197 +258,512 @@
       </ul>
         <ul class="toc-footer">
             <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Coinbase provides a simple, fast, and reliable <strong>JSON-RPC API</strong> for Ethereum developers. We know it&#39;s hard to build on Ethereum, and that&#39;s why we&#39;ve built powerful endpoints that make key tasks trivial </p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<p>This API reference provides information on available endpoints and how to interact with them.</p>
+<h1 id='authentication'>Authentication</h1><pre class="highlight shell tab-shell"><code>curl https://eth-mainnet.api.coinbase.com/v1/API-KEY <span class="se">\</span>
+-X POST <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":3}'</span>
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Results:</p>
 </blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x65a8db"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
+<p>To use the Coinbase ETH API, you need an API key to authenticate your requests. To obtain your API key contact us <a href="https://developers.coinbase.com/">here</a>.</p>
+
+<p>The API is designed according to the <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> standards </p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
+<p><code>curl https://&lt;network&gt;.api.coinbase.com/v1/API-KEYy</code></p>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+Replace `API-KEY` with your unique API-KEY
 </aside>
+<h1 id='erc20-tokens'>ERC20 Tokens</h1>
+<p>The tokens supported for this endpoint are:</p>
 
-<p>The Kittn API uses the following error codes:</p>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Symbol</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>USD Coin</td>
+<td><code>usdc</code></td>
+</tr>
+<tr>
+<td>Multi-Collateral Dai</td>
+<td><code>dai</code></td>
+</tr>
+<tr>
+<td>Single-Collateral Dai</td>
+<td><code>sai</code></td>
+</tr>
+<tr>
+<td>Compound Dai</td>
+<td><code>cdai</code></td>
+</tr>
+<tr>
+<td>Maker</td>
+<td><code>mkr</code></td>
+</tr>
+<tr>
+<td>Basic Attention Token</td>
+<td><code>bat</code></td>
+</tr>
+<tr>
+<td>OmiseGo</td>
+<td><code>omg</code></td>
+</tr>
+<tr>
+<td>Synthetix</td>
+<td><code>snx</code></td>
+</tr>
+<tr>
+<td>Augur</td>
+<td><code>rep</code></td>
+</tr>
+<tr>
+<td>Golem</td>
+<td><code>gnt</code></td>
+</tr>
+<tr>
+<td>ZRX</td>
+<td><code>zrx</code></td>
+</tr>
+<tr>
+<td>Decentraland</td>
+<td><code>mana</code></td>
+</tr>
+<tr>
+<td>Numerai</td>
+<td><code>nmr</code></td>
+</tr>
+<tr>
+<td>Tokencard</td>
+<td><code>tkn</code></td>
+</tr>
+<tr>
+<td>Bancor</td>
+<td><code>bnt</code></td>
+</tr>
+<tr>
+<td>Loom Network</td>
+<td><code>loom</code></td>
+</tr>
+<tr>
+<td>Status</td>
+<td><code>snt</code></td>
+</tr>
+<tr>
+<td>Civic</td>
+<td><code>cvc</code></td>
+</tr>
+<tr>
+<td>Kyber Network</td>
+<td><code>knc</code></td>
+</tr>
+<tr>
+<td>iExec RLC</td>
+<td><code>rlc</code></td>
+</tr>
+<tr>
+<td>ChainLink</td>
+<td><code>link</code></td>
+</tr>
+<tr>
+<td>Fetch.ai.</td>
+<td><code>fet</code></td>
+</tr>
+<tr>
+<td>Tether</td>
+<td><code>usdt_erc20</code></td>
+</tr>
+<tr>
+<td>Paxos Standard Token</td>
+<td><code>pax</code></td>
+</tr>
+<tr>
+<td>TrueUSD</td>
+<td><code>tusd</code></td>
+</tr>
+<tr>
+<td>Gemini Dollar</td>
+<td><code>gusd</code></td>
+</tr>
+</tbody></table>
+
+<p>All endpoints in this section return a meta object</p>
+
+<p><strong><code>Meta Object</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>latestBlockNumber</td>
+<td>integer</td>
+<td>The block number of the latest block as seen by Coinbase</td>
+</tr>
+<tr>
+<td>latestBlockTimestamp</td>
+<td>integer</td>
+<td>The block timestamp number of the latest block as seen by Coinbase</td>
+</tr>
+</tbody></table>
+<h2 id='token-balances'>Token Balances</h2>
+<p>This endpoint returns the token balances for a specific address given a list of tokens.</p>
+<pre class="highlight shell tab-shell"><code>curl https://eth-mainnet.api.coinbase.com/v1/API-KEY <span class="se">\</span>
+-X POST <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{"jsonrpc":"2.0","method":"get_tokenBalances","params":{"address":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", "tokens":["mkr", "dai", "zrx"]},"id":7}'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tokenBalances"</span><span class="p">:</span><span class="w"> 
+      </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"mkr"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tokenBalance"</span><span class="p">:</span><span class="w"> </span><span class="mi">213</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"dai"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tokenBalance"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"zrx"</span><span class="p">,</span><span class="s2">"tokenBalance"</span><span class="p">:</span><span class="w"> </span><span class="mf">323.33</span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"latestBlockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='data'>DATA</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address *</td>
+<td><em>string</em></td>
+<td>The address (20 characters) to check for balance</td>
+</tr>
+<tr>
+<td>tokens *</td>
+<td>[<em>strings</em>]</td>
+<td>Token(s) from the <a href="#erc20-tokens">table</a> that we support by name</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note: All parameters with a * are requried
+</aside>
+<h3 id='response-overview'>Response Overview</h3>
+<p><strong><code>Result Object</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address</td>
+<td><em>string</em></td>
+<td>The address for which token balances were checked (20 characters)</td>
+</tr>
+<tr>
+<td>tokenBalances</td>
+<td>[Object]</td>
+<td>Returns an array of token balance objects. Each object has a <code>tokenName</code> field that is a <code>string</code> and a <code>tokenBalance</code> field, which is either <code>decimal</code> or <code>null</code> (if no token balance exists)</td>
+</tr>
+<tr>
+<td>blockNumber</td>
+<td>integer</td>
+<td>The token balances are calculated as of this block</td>
+</tr>
+<tr>
+<td>blockTimestamp</td>
+<td>integer</td>
+<td>The unix timestamp for when the block was mined</td>
+</tr>
+</tbody></table>
+<h2 id='token-transfers'>Token Transfers</h2>
+<p>This endpoint returns the token transfers for a specific transaction hash</p>
+<pre class="highlight shell tab-shell"><code>curl https://eth-mainnet.api.coinbase.com/v1/api_key <span class="se">\</span>
+-X POST <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{"jsonrpc":"2.0","method":"get_tokenTransfersByHash","params":{"transactionHash":"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"},"id":7}'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"transactionHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tokenTransfers"</span><span class="p">:</span><span class="w"> 
+      </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"mkr"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tokenContract"</span><span class="p">:</span><span class="s2">"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="mi">223</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"logIndex"</span><span class="p">:</span><span class="mi">3</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"blockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"latestBlockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='data-2'>DATA</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transactionHash *</td>
+<td><em>string</em></td>
+<td>String representing the hash (32 characters) of the transaction</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note: All parameters with a * are requried
+</aside>
+<h3 id='response-overview-2'>Response Overview</h3>
+<p><strong><code>Result Object</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transactionHash</td>
+<td>string</td>
+<td>The hash of the transaction (32 characters)</td>
+</tr>
+<tr>
+<td>tokenTransfers</td>
+<td>[Object]</td>
+<td>Returns an array of token transfer objects (definition below)</td>
+</tr>
+</tbody></table>
+
+<p><strong><code>tokenTransfers Object</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>Address of the sender (20 characters)</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>Address of the receiver (20 characters)</td>
+</tr>
+<tr>
+<td>tokenName</td>
+<td>string</td>
+<td>Name of the token</td>
+</tr>
+<tr>
+<td>tokenContract</td>
+<td>string</td>
+<td>Address of the token contract string</td>
+</tr>
+<tr>
+<td>value</td>
+<td>decimal</td>
+<td>Value of the tokens transferred</td>
+</tr>
+<tr>
+<td>logIndex</td>
+<td>integer</td>
+<td>integer of the transfer events position in the block; useful when there are multiple transfers in one transaction</td>
+</tr>
+</tbody></table>
+<h2 id='token-transfers-by-address'>Token Transfers by Address</h2>
+<p>This endpoint returns the token transfers for a specific address</p>
+<pre class="highlight shell tab-shell"><code>curl https://eth-mainnet.api.coinbase.com/v1/api_key <span class="se">\</span>
+-X POST <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{"jsonrpc":"2.0","method":"get_tokenTransfersByAddress","params":{"address":"0xecA41677558025c76BfD20e9289283cb4Ca85f46"},"id":7}'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tokenTransfers"</span><span class="p">:</span><span class="w"> 
+      </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"mkr"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tokenContract"</span><span class="p">:</span><span class="s2">"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="mi">223</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"transactionHash"</span><span class="p">:</span><span class="s2">"0x30ef9d430ac1ad6fa9807603048fd2abc79bc9dc43012a57da9a2899f15cb576"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"blockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"blockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879512</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"zrx"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tokenContract"</span><span class="p">:</span><span class="s2">"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="mi">24223</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"blockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">6909779</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"blockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"latestBlockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='data-3'>DATA</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address *</td>
+<td><em>string</em></td>
+<td>The address (20 characters) to check for token transfers</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note: All parameters with a * are requried
+</aside>
+<h3 id='response-overview-3'>Response Overview</h3>
+<p><strong><code>Result Object</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>The address to check for token transfer (20 characters)</td>
+</tr>
+<tr>
+<td>tokenTransfers</td>
+<td>[Object]</td>
+<td>Returns an array of token transfer objects (definition below), empty array if no token transfers</td>
+</tr>
+</tbody></table>
+
+<p><strong><code>tokenTransfers Object</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>Address of the sender (20 characters)</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>Address of the receiver (20 characters)</td>
+</tr>
+<tr>
+<td>tokenName</td>
+<td>string</td>
+<td>Name of the token</td>
+</tr>
+<tr>
+<td>tokenContract</td>
+<td>string</td>
+<td>Address of the token contract string</td>
+</tr>
+<tr>
+<td>value</td>
+<td>decimal</td>
+<td>Value of the tokens transferred</td>
+</tr>
+<tr>
+<td>transactionHash</td>
+<td>integer</td>
+<td>String representing the hash (32 characters) of the transaction</td>
+</tr>
+<tr>
+<td>blockNumber</td>
+<td>integer</td>
+<td>The block in which the token transfers occured</td>
+</tr>
+<tr>
+<td>blockTimestamp</td>
+<td>integer</td>
+<td>The unix timestamp for when the block was mined</td>
+</tr>
+</tbody></table>
+<h2 id='token-balance-at-block'>Token Balance at Block</h2><h2 id='token-metadata'>Token Metadata</h2><h2 id='token-allowance'>Token Allowance</h2><h1 id='errors'>Errors</h1>
+<aside class="notice">
+In addition to the standard <a href="https://github.com/ethereum/wiki/wiki/JSON-RPC-Error-Codes-Improvement-Proposal#json-rpc-standard-errors">Ethereum JSON-RPC error codes</a>, the Coinbase API will return the following error codes:
+</aside>
 
 <table><thead>
 <tr>
@@ -454,32 +780,12 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 <td>Unauthorized -- Your API key is wrong.</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
+<td>Not Found -- The specified endpoint could not be found.</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests -- You&#39;ve hit your rate limit. Contact us if you require a higher rate limit.</td>
 </tr>
 <tr>
 <td>500</td>
@@ -495,9 +801,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
