@@ -31,7 +31,7 @@ The tokens supported for this endpoint are:
 | TrueUSD              | `tusd`       |
 | Gemini Dollar        | `gusd`       |
 
-All endpoints return a meta object
+All endpoints in this section return a meta object
 
 **`Meta Object`**
 
@@ -189,7 +189,7 @@ Note: All parameters with a * are requried
 
 ## Token Transfers by Address
 
-This endpoint returns the token transfers for a specific transaction hash
+This endpoint returns the token transfers for a specific address
 
 
 ```shell
