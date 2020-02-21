@@ -31,6 +31,16 @@ The tokens supported for this endpoint are:
 | TrueUSD              | `tusd`       |
 | Gemini Dollar        | `gusd`       |
 
+All endpoints return a meta object
+
+**`Meta Object`**
+
+| Field      | Type      | Description                                                                                               |
+| ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                             
+| latestBlockNumber     | integer | The block number of the latest block as seen by Coinbase |
+| latestBlockTimestamp | integer | The block timestamp number of the latest block as seen by Coinbase |
+
+
 
 ## Token Balances
 
@@ -59,8 +69,10 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
         {"tokenName":"dai", "tokenBalance": null},
         {"tokenName":"zrx","tokenBalance": 323.33}
       ],
-      "blockNumber": 7909779,
-      "blockTimestamp": 1559879572
+    },
+    "meta":{
+      "latestBlockNumber": 7909779,
+      "latestBlockTimestamp": 1559879572
     }
 }
 ```
@@ -128,6 +140,10 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
       ],
       "blockNumber": 7909779,
       "blockTimestamp": 1559879572
+    },
+    "meta":{
+      "latestBlockNumber": 7909779,
+      "latestBlockTimestamp": 1559879572
     }
 }
 ```
@@ -156,8 +172,6 @@ Note: All parameters with a * are requried
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
 | transactionHash     | string | The hash of the transaction (32 characters) |
 | tokenTransfers | [Object] | Returns an array of token transfer objects (definition below) |                              
-| blockNumber     | integer | The block in which the token transfers occured |
-| blockTimestamp | integer | The unix timestamp for when the block was mined |
 
 
 **`tokenTransfers Object`**
@@ -170,6 +184,7 @@ Note: All parameters with a * are requried
 | tokenContract | string | Address of the token contract string |
 | value | decimal | Value of the tokens transferred|
 | logIndex | integer | integer of the transfer events position in the block; useful when there are multiple transfers in one transaction |
+
 
 
 ## Token Transfers by Address
@@ -215,8 +230,10 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
           "blockTimestamp": 1559879572
         },
       ],
-      "blockNumber": 7909779,
-      "blockTimestamp": 1559879572
+    },
+    "meta":{
+      "latestBlockNumber": 7909779,
+      "latestBlockTimestamp": 1559879572
     }
 }
 ```
