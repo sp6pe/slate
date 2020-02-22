@@ -287,7 +287,7 @@
 
 <p>The API is designed according to the <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> standards </p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>curl https://&lt;network&gt;.api.coinbase.com/v1/API-KEYy</code></p>
+<p><code>curl https://&lt;network&gt;.api.coinbase.com/v1/API-KEY</code></p>
 
 <aside class="notice">
 Replace `API-KEY` with your unique API-KEY
@@ -428,6 +428,11 @@ Replace `API-KEY` with your unique API-KEY
 <td>integer</td>
 <td>The block timestamp number of the latest block as seen by Coinbase</td>
 </tr>
+<tr>
+<td>timestamp</td>
+<td>integer</td>
+<td>The current time at our endpoint</td>
+</tr>
 </tbody></table>
 <h2 id='token-balances'>Token Balances</h2>
 <p>This endpoint returns the token balances for a specific address given a list of tokens.</p>
@@ -447,14 +452,15 @@ Replace `API-KEY` with your unique API-KEY
       </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"tokenBalances"</span><span class="p">:</span><span class="w"> 
       </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"mkr"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tokenBalance"</span><span class="p">:</span><span class="w"> </span><span class="mi">213</span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"dai"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tokenBalance"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"zrx"</span><span class="p">,</span><span class="s2">"tokenBalance"</span><span class="p">:</span><span class="w"> </span><span class="mf">323.33</span><span class="p">}</span><span class="w">
+        </span><span class="p">{</span><span class="s2">"tokenName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mkr"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tokenBalance"</span><span class="p">:</span><span class="w"> </span><span class="mi">213</span><span class="p">,</span><span class="w"> </span><span class="s2">"priceUsd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"617.22"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="s2">"tokenName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dai"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tokenBalance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"priceUsd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.01"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="s2">"tokenName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zrx"</span><span class="p">,</span><span class="s2">"tokenBalance"</span><span class="p">:</span><span class="w"> </span><span class="mf">323.33</span><span class="p">,</span><span class="w"> </span><span class="s2">"priceUsd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.32"</span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
       </span><span class="s2">"latestBlockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1540474596175</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='data'>DATA</h3>
@@ -498,17 +504,33 @@ Note: All parameters with a * are requried
 <tr>
 <td>tokenBalances</td>
 <td>[Object]</td>
-<td>Returns an array of token balance objects. Each object has a <code>tokenName</code> field that is a <code>string</code> and a <code>tokenBalance</code> field, which is either <code>decimal</code> or <code>null</code> (if no token balance exists)</td>
+<td>Returns an array of token balance objects. Each object has a <code>tokenName</code> field that is a <code>string</code> and a <code>tokenBalance</code> field that is a <code>decimal</code></td>
+</tr>
+</tbody></table>
+
+<p><strong><code>Token Balances Object</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tokenName</td>
+<td><em>string</em></td>
+<td>The name of the token</td>
 </tr>
 <tr>
-<td>blockNumber</td>
-<td>integer</td>
-<td>The token balances are calculated as of this block</td>
+<td>tokenBalance</td>
+<td><em>decimal</em></td>
+<td>The decoded balance of the token in the <code>address</code>. <code>0</code> if no balance</td>
 </tr>
 <tr>
-<td>blockTimestamp</td>
-<td>integer</td>
-<td>The unix timestamp for when the block was mined</td>
+<td>priceUsd</td>
+<td><em>string</em></td>
+<td>The market price in USD of the token at the <code>timestamp</code> field in the meta object</td>
 </tr>
 </tbody></table>
 <h2 id='token-transfers'>Token Transfers</h2>
@@ -530,12 +552,13 @@ Note: All parameters with a * are requried
       </span><span class="s2">"tokenTransfers"</span><span class="p">:</span><span class="w"> 
       </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w"> 
           </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"tokenName"</span><span class="p">:</span><span class="s2">"mkr"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"tokenContract"</span><span class="p">:</span><span class="s2">"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"value"</span><span class="p">:</span><span class="mi">223</span><span class="p">,</span><span class="w"> 
-          </span><span class="s2">"logIndex"</span><span class="p">:</span><span class="mi">3</span><span class="w">
+          </span><span class="s2">"tokenName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mkr"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tokenContract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">223</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"logIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"priceUsd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"273.23"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="s2">"blockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
@@ -543,7 +566,8 @@ Note: All parameters with a * are requried
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
       </span><span class="s2">"latestBlockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1540474596175</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='data-2'>DATA</h3>
@@ -584,6 +608,16 @@ Note: All parameters with a * are requried
 <td>[Object]</td>
 <td>Returns an array of token transfer objects (definition below)</td>
 </tr>
+<tr>
+<td>blockNumber</td>
+<td>integer</td>
+<td>The block in which the token transfers occured</td>
+</tr>
+<tr>
+<td>blockTimestamp</td>
+<td>integer</td>
+<td>The unix timestamp for when the block was mined</td>
+</tr>
 </tbody></table>
 
 <p><strong><code>tokenTransfers Object</code></strong></p>
@@ -597,32 +631,37 @@ Note: All parameters with a * are requried
 </thead><tbody>
 <tr>
 <td>from</td>
-<td>string</td>
+<td><em>string</em></td>
 <td>Address of the sender (20 characters)</td>
 </tr>
 <tr>
 <td>to</td>
-<td>string</td>
+<td><em>string</em></td>
 <td>Address of the receiver (20 characters)</td>
 </tr>
 <tr>
 <td>tokenName</td>
-<td>string</td>
+<td><em>string</em></td>
 <td>Name of the token</td>
 </tr>
 <tr>
 <td>tokenContract</td>
-<td>string</td>
+<td><em>string</em></td>
 <td>Address of the token contract string</td>
 </tr>
 <tr>
 <td>value</td>
-<td>decimal</td>
+<td><em>decimal</em></td>
 <td>Value of the tokens transferred</td>
 </tr>
 <tr>
+<td>priceUsd</td>
+<td><em>string</em></td>
+<td>Price in USD of the token at <code>blockTimestamp</code></td>
+</tr>
+<tr>
 <td>logIndex</td>
-<td>integer</td>
+<td><em>integer</em></td>
 <td>integer of the transfer events position in the block; useful when there are multiple transfers in one transaction</td>
 </tr>
 </tbody></table>
@@ -652,7 +691,8 @@ Note: All parameters with a * are requried
           </span><span class="s2">"value"</span><span class="p">:</span><span class="mi">223</span><span class="p">,</span><span class="w">
           </span><span class="s2">"transactionHash"</span><span class="p">:</span><span class="s2">"0x30ef9d430ac1ad6fa9807603048fd2abc79bc9dc43012a57da9a2899f15cb576"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"blockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"blockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879512</span><span class="w">
+          </span><span class="s2">"blockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879512</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"priceUsd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"673.23"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w"> 
@@ -661,13 +701,15 @@ Note: All parameters with a * are requried
           </span><span class="s2">"tokenContract"</span><span class="p">:</span><span class="s2">"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"value"</span><span class="p">:</span><span class="mi">24223</span><span class="p">,</span><span class="w"> 
           </span><span class="s2">"blockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">6909779</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"blockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+          </span><span class="s2">"blockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"priceUsd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.23"</span><span class="w">
         </span><span class="p">},</span><span class="w">
       </span><span class="p">],</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
       </span><span class="s2">"latestBlockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1540474596175</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='data-3'>DATA</h3>
@@ -758,6 +800,11 @@ Note: All parameters with a * are requried
 <td>blockTimestamp</td>
 <td>integer</td>
 <td>The unix timestamp for when the block was mined</td>
+</tr>
+<tr>
+<td>priceUsd</td>
+<td><em>string</em></td>
+<td>Price in USD of the token at <code>blockTimestamp</code></td>
 </tr>
 </tbody></table>
 <h2 id='token-balance-at-block'>Token Balance at Block</h2><h2 id='token-metadata'>Token Metadata</h2><h2 id='token-allowance'>Token Allowance</h2><h1 id='errors'>Errors</h1>
