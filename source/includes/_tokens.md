@@ -38,8 +38,8 @@ All endpoints in this section return a meta object
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                             
 | latestBlockNumber     | integer | The block number of the latest block as seen by Coinbase |
-| latestBlockTimestamp | integer | The block timestamp number of the latest block as seen by Coinbase |
-| timestamp | integer | The current time at our endpoint |
+| latestBlockTimestamp | integer | The block UNIX timestamp in seconds of the latest block as seen by Coinbase |
+| timestamp | integer | The server UNIX timestamp in seconds when the API request is made |
 
 
 
@@ -52,7 +52,7 @@ This endpoint returns the token balances for a specific address given a list of 
 curl https://eth-mainnet.api.coinbase.com/v1/API-KEY \
 -X POST \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"get_tokenBalances","params":{"address":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", "tokens":["mkr", "dai", "zrx"]},"id":7}'
+-d '{"jsonrpc":"2.0","method":"get_tokenBalances","params":{"address":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", "tokenSymbols":["mkr", "dai", "zrx"]},"id":7}'
 ```
 
 > The above command returns JSON structured like this:
@@ -66,15 +66,15 @@ curl https://eth-mainnet.api.coinbase.com/v1/API-KEY \
       "address": "0xecA41677558025c76BfD20e9289283cb4Ca85f46",
       "tokenBalances": 
       [
-        {"tokenName": "mkr", "tokenBalance": 213, "priceUsd": "617.22"},
-        {"tokenName": "dai", "tokenBalance": 0, "priceUsd": "1.01"},
-        {"tokenName": "zrx","tokenBalance": 323.33, "priceUsd": "0.32"}
+        {"tokenSymbol": "mkr", "tokenBalance": 213, "priceUsd": "617.22"},
+        {"tokenSymbol": "dai", "tokenBalance": 0, "priceUsd": "1.01"},
+        {"tokenSymbol": "zrx","tokenBalance": 323.33, "priceUsd": "0.32"}
       ],
     },
     "meta":{
       "latestBlockNumber": 7909779,
       "latestBlockTimestamp": 1559879572,
-      "timestamp": 1540474596175
+      "timestamp": 1540474596
     }
 }
 ```
@@ -85,7 +85,7 @@ curl https://eth-mainnet.api.coinbase.com/v1/API-KEY \
 | Parameter | Type     | Description                                         |
 | --------- | -------- | --------------------------------------------------- |
 | address \*       | _string_ | The address (20 characters) to check for balance                                |
-| tokens \*    | [_strings_] | Token(s) from the [table](#erc20-tokens) that we support by name               |
+| tokenSymbols \*    | [_strings_] | Token symbols from the supported [table](#erc20-tokens)          |
 
 <aside class="notice">
 Note: All parameters with a * are requried
@@ -99,16 +99,16 @@ Note: All parameters with a * are requried
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |
 | address     | _string_ | The address for which token balances were checked (20 characters) |
-| tokenBalances | [Object] | Returns an array of token balance objects. Each object has a `tokenName` field that is a `string` and a `tokenBalance` field that is a `decimal` |           
+| tokenBalances | [Object] | Returns an array of token balance objects. Each object has a `tokenSymbol` field that is a `string` and a `tokenBalance` field that is a `decimal` |           
 
 
 **`Token Balances Object`**
 
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- 
-| tokenName     | _string_ | The name of the token |
+| tokenSymbol     | _string_ | The symbol of the token from the [table](#erc20-tokens)  |
 | tokenBalance | _decimal_ | The decoded balance of the token in the `address`. `0` if no balance | 
-| priceUsd | _string_ | The market price in USD of the token at the `timestamp` field in the meta object |       
+| priceUsd | _string_ | The market price in USD of the token at the `timestamp` field in the meta object sourced from Coinbase Pro |       
 
 
 ## Token Transfers
@@ -137,7 +137,7 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
         {
           "from": "0xecA41677558025c76BfD20e9289283cb4Ca85f46", 
           "to": "0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD",
-          "tokenName": "mkr",
+          "tokenSymbol": "mkr",
           "tokenContract": "0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90",
           "value": 223, 
           "logIndex": 3,
@@ -150,7 +150,7 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
     "meta":{
       "latestBlockNumber": 7909779,
       "latestBlockTimestamp": 1559879572,
-      "timestamp": 1540474596175
+      "timestamp": 1540474596
     }
 }
 ```
@@ -178,7 +178,7 @@ Note: All parameters with a * are requried
 | transactionHash     | string | The hash of the transaction (32 characters) |
 | tokenTransfers | [Object] | Returns an array of token transfer objects (definition below) |                              
 | blockNumber     | integer | The block in which the token transfers occured |
-| blockTimestamp | integer | The unix timestamp for when the block was mined |
+| blockTimestamp | integer | The UNIX timestamp in seconds for when the block was mined |
 
 **`tokenTransfers Object`**
 
@@ -186,10 +186,10 @@ Note: All parameters with a * are requried
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
 | from     | _string_ | Address of the sender (20 characters) |
 | to | _string_| Address of the receiver (20 characters) |                              
-| tokenName     | _string_ | Name of the token |
+| tokenSymbol     | _string_ | Name of the token |
 | tokenContract | _string_ | Address of the token contract string |
 | value | _decimal_ | Value of the tokens transferred|
-| priceUsd | _string_ | Price in USD of the token at `blockTimestamp` |
+| priceUsd | _string_ | Price in USD of the token at `blockTimestamp` sourced from Coinbase Pro|
 | logIndex | _integer_ | integer of the transfer events position in the block; useful when there are multiple transfers in one transaction |
 
 
@@ -220,7 +220,7 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
         {
           "from":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", 
           "to": "0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD",
-          "tokenName":"mkr",
+          "tokenSymbol":"mkr",
           "tokenContract":"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90",
           "value":223,
           "transactionHash":"0x30ef9d430ac1ad6fa9807603048fd2abc79bc9dc43012a57da9a2899f15cb576",
@@ -231,7 +231,7 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
         {
           "from":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", 
           "to": "0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD",
-          "tokenName":"zrx",
+          "tokenSymbol":"zrx",
           "tokenContract":"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90",
           "value":24223, 
           "blockNumber": 6909779,
@@ -243,7 +243,7 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
     "meta":{
       "latestBlockNumber": 7909779,
       "latestBlockTimestamp": 1559879572,
-      "timestamp": 1540474596175
+      "timestamp": 1540474596
     }
 }
 ```
@@ -277,13 +277,13 @@ Note: All parameters with a * are requried
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
 | from     | string | Address of the sender (20 characters) |
 | to | string| Address of the receiver (20 characters) |                              
-| tokenName     | string | Name of the token |
+| tokenSymbol     | string | Name of the token |
 | tokenContract | string | Address of the token contract string |
 | value | decimal | Value of the tokens transferred|
 | transactionHash     | integer | String representing the hash (32 characters) of the transaction |
 | blockNumber     | integer | The block in which the token transfers occured |
 | blockTimestamp | integer | The unix timestamp for when the block was mined |
-| priceUsd | _string_ | Price in USD of the token at `blockTimestamp` |
+| priceUsd | _string_ | Price in USD of the token at `blockTimestamp` sourced from Coinbase Pro|
 
 ## Token Balance at Block
 
