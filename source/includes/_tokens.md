@@ -99,16 +99,16 @@ Note: All parameters with a * are requried
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |
 | address     | _string_ | The address for which token balances were checked (20 characters) |
-| tokenBalances | [Object] | Returns an array of token balance objects. Each object has a `tokenSymbol` field that is a `string` and a `tokenBalance` field that is a `decimal` |           
+| tokenBalances | [Object] | Returns an array of token balance objects (definition below)  |           
 
 
-**`Token Balances Object`**
+**`tokenBlanances Object`**
 
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- 
-| tokenSymbol     | _string_ | The symbol of the token from the [table](#erc20-tokens)  |
+| tokenSymbol     | _string_ | The symbol of the token |
 | tokenBalance | _decimal_ | The decoded balance of the token in the `address`. `0` if no balance | 
-| priceUsd | _string_ | The market price in USD of the token at the `timestamp` field in the meta object sourced from Coinbase Pro |       
+| priceUsd | _string_ | The market price in USD of the token at the `timestamp` field in the meta object. Price sourced from Coinbase Pro |       
 
 
 ## Token Transfers
@@ -175,10 +175,10 @@ Note: All parameters with a * are requried
 
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
-| transactionHash     | string | The hash of the transaction (32 characters) |
+| transactionHash     | _string_ | The hash of the transaction (32 characters) |
 | tokenTransfers | [Object] | Returns an array of token transfer objects (definition below) |                              
-| blockNumber     | integer | The block in which the token transfers occured |
-| blockTimestamp | integer | The UNIX timestamp in seconds for when the block was mined |
+| blockNumber     | _intege_r | The block in which the token transfers occured |
+| blockTimestamp | _integer_ | The UNIX timestamp in seconds for when the block was mined |
 
 **`tokenTransfers Object`**
 
@@ -189,7 +189,7 @@ Note: All parameters with a * are requried
 | tokenSymbol     | _string_ | Name of the token |
 | tokenContract | _string_ | Address of the token contract string |
 | value | _decimal_ | Value of the tokens transferred|
-| priceUsd | _string_ | Price in USD of the token at `blockTimestamp` sourced from Coinbase Pro|
+| priceUsd | _string_ | Price in USD of the token at `blockTimestamp`. Price sourced from Coinbase Pro|
 | logIndex | _integer_ | integer of the transfer events position in the block; useful when there are multiple transfers in one transaction |
 
 
@@ -268,7 +268,7 @@ Note: All parameters with a * are requried
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
 | address     | string | The address to check for token transfer (20 characters) |
-| tokenTransfers | [Object] | Returns an array of token transfer objects (definition below), empty array if no token transfers |                              
+| tokenTransfers | [Object] | Returns an array of token transfer objects (definition below) |                              
 
 
 **`tokenTransfers Object`**
@@ -283,7 +283,7 @@ Note: All parameters with a * are requried
 | transactionHash     | integer | String representing the hash (32 characters) of the transaction |
 | blockNumber     | integer | The block in which the token transfers occured |
 | blockTimestamp | integer | The unix timestamp for when the block was mined |
-| priceUsd | _string_ | Price in USD of the token at `blockTimestamp` sourced from Coinbase Pro|
+| priceUsd | _string_ | Price in USD of the token at `blockTimestamp`. Price sourced from Coinbase Pro|
 
 ## Token Balance at Block
 

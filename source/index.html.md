@@ -46,7 +46,7 @@ curl https://eth-mainnet.api.coinbase.com/v1/API-KEY \
 }
 ```
 
-To use the Coinbase ETH API, you need an API key to authenticate your requests. To obtain your API key contact us [here](https://developers.coinbase.com/).
+To use the Coinbase Blockchain API, you need an API key to authenticate your requests. To obtain your API key contact us [here](https://developers.coinbase.com/).
 
 The API is designed according to the [JSON-RPC](https://www.jsonrpc.org/specification) standards 
 
