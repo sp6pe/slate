@@ -177,7 +177,7 @@ Note: All parameters with a * are requried
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
 | transactionHash     | _string_ | The hash of the transaction (32 characters) |
 | tokenTransfers | [Object] | Returns an array of token transfer objects (definition below) |                              
-| blockNumber     | _intege_r | The block in which the token transfers occured |
+| blockNumber     | _intege_ | The block in which the token transfers occured |
 | blockTimestamp | _integer_ | The UNIX timestamp in seconds for when the block was mined |
 
 **`tokenTransfers Object`**
@@ -189,7 +189,7 @@ Note: All parameters with a * are requried
 | tokenSymbol     | _string_ | Name of the token |
 | tokenContract | _string_ | Address of the token contract string |
 | value | _decimal_ | Value of the tokens transferred|
-| priceUsd | _string_ | Price in USD of the token at `blockTimestamp`. Price sourced from Coinbase Pro|
+| priceUsd | _string_ | Price in USD of the `tokenSymbol` at `blockTimestamp`. Price sourced from Coinbase Pro|
 | logIndex | _integer_ | integer of the transfer events position in the block; useful when there are multiple transfers in one transaction |
 
 
@@ -233,6 +233,7 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
           "to": "0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD",
           "tokenSymbol":"zrx",
           "tokenContract":"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90",
+          "transactionHash":"0x30ef9d430ac1ad6fa9807603048fd2abc79bc9dc43012a57da9a2899f15cb576",
           "value":24223, 
           "blockNumber": 6909779,
           "blockTimestamp": 1559879572,
@@ -283,7 +284,7 @@ Note: All parameters with a * are requried
 | transactionHash     | integer | String representing the hash (32 characters) of the transaction |
 | blockNumber     | integer | The block in which the token transfers occured |
 | blockTimestamp | integer | The unix timestamp for when the block was mined |
-| priceUsd | _string_ | Price in USD of the token at `blockTimestamp`. Price sourced from Coinbase Pro|
+| priceUsd | _string_ | Price in USD of the `tokenSymbol` at `blockTimestamp`. Price sourced from Coinbase Pro|
 
 ## Token Balance at Block
 
