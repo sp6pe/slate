@@ -51,7 +51,7 @@ To use the Coinbase ETH API, you need an API key to authenticate your requests. 
 The API is designed according to the [JSON-RPC](https://www.jsonrpc.org/specification) standards 
 
 ###HTTP Request
-`curl https://<network>.api.coinbase.com/v1/API-KEYy`
+`curl https://<network>.api.coinbase.com/v1/API-KEY`
 
 <aside class="notice">
 Replace `API-KEY` with your unique API-KEY
