@@ -102,96 +102,13 @@ Note: All parameters with a * are requried
 | tokenBalances | [Object] | Returns an array of token balance objects (definition below)  |           
 
 
-**`tokenBlanances Object`**
+**`tokenBalances Object`**
 
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- 
 | tokenSymbol     | _string_ | The symbol of the token |
 | tokenBalance | _decimal_ | The decoded balance of the token in the `address`. `0` if no balance | 
 | priceUsd | _string_ | The market price in USD of the token at the `timestamp` field in the meta object. Price sourced from Coinbase Pro |       
-
-
-## Token Transfers
-
-This endpoint returns the token transfers for a specific transaction hash
-
-
-```shell
-curl https://eth-mainnet.api.coinbase.com/v1/api_key \
--X POST \
--H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"get_tokenTransfersByHash","params":{"transactionHash":"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"},"id":7}'
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 7,
-  "result": 
-    {
-      "transactionHash": "0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838",
-      "tokenTransfers": 
-      [
-        {
-          "from": "0xecA41677558025c76BfD20e9289283cb4Ca85f46", 
-          "to": "0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD",
-          "tokenSymbol": "mkr",
-          "tokenContract": "0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90",
-          "value": 223, 
-          "logIndex": 3,
-          "priceUsd": "273.23"
-        }
-      ],
-      "blockNumber": 7909779,
-      "blockTimestamp": 1559879572
-    },
-    "meta":{
-      "latestBlockNumber": 7909779,
-      "latestBlockTimestamp": 1559879572,
-      "timestamp": 1540474596
-    }
-}
-```
-
-
-
-
-### DATA
-
-| Parameter | Type     | Description                                         |
-| --------- | -------- | --------------------------------------------------- |
-| transactionHash \*       | _string_ | String representing the hash (32 characters) of the transaction                               |
-
-<aside class="notice">
-Note: All parameters with a * are requried
-</aside>
-
-
-### Response Overview
-
-**`Result Object`**
-
-| Field      | Type      | Description                                                                                               |
-| ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
-| transactionHash     | _string_ | The hash of the transaction (32 characters) |
-| tokenTransfers | [Object] | Returns an array of token transfer objects (definition below) |                              
-| blockNumber     | _intege_ | The block in which the token transfers occured |
-| blockTimestamp | _integer_ | The UNIX timestamp in seconds for when the block was mined |
-
-**`tokenTransfers Object`**
-
-| Field      | Type      | Description                                                                                               |
-| ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
-| from     | _string_ | Address of the sender (20 characters) |
-| to | _string_| Address of the receiver (20 characters) |                              
-| tokenSymbol     | _string_ | Name of the token |
-| tokenContract | _string_ | Address of the token contract string |
-| value | _decimal_ | Value of the tokens transferred|
-| priceUsd | _string_ | Price in USD of the `tokenSymbol` at `blockTimestamp`. Price sourced from Coinbase Pro|
-| logIndex | _integer_ | integer of the transfer events position in the block; useful when there are multiple transfers in one transaction |
-
 
 
 ## Token Transfers by Address
@@ -285,6 +202,89 @@ Note: All parameters with a * are requried
 | blockNumber     | integer | The block in which the token transfers occured |
 | blockTimestamp | integer | The unix timestamp for when the block was mined |
 | priceUsd | _string_ | Price in USD of the `tokenSymbol` at `blockTimestamp`. Price sourced from Coinbase Pro|
+
+## Token Transfers by Transaction Hash
+
+This endpoint returns the token transfers for a specific transaction hash
+
+
+```shell
+curl https://eth-mainnet.api.coinbase.com/v1/api_key \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"get_tokenTransfersByHash","params":{"transactionHash":"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"},"id":7}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 7,
+  "result": 
+    {
+      "transactionHash": "0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838",
+      "tokenTransfers": 
+      [
+        {
+          "from": "0xecA41677558025c76BfD20e9289283cb4Ca85f46", 
+          "to": "0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD",
+          "tokenSymbol": "mkr",
+          "tokenContract": "0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90",
+          "value": 223, 
+          "logIndex": 3,
+          "priceUsd": "273.23"
+        }
+      ],
+      "blockNumber": 7909779,
+      "blockTimestamp": 1559879572
+    },
+    "meta":{
+      "latestBlockNumber": 7909779,
+      "latestBlockTimestamp": 1559879572,
+      "timestamp": 1540474596
+    }
+}
+```
+
+
+
+
+### DATA
+
+| Parameter | Type     | Description                                         |
+| --------- | -------- | --------------------------------------------------- |
+| transactionHash \*       | _string_ | String representing the hash (32 characters) of the transaction                               |
+
+<aside class="notice">
+Note: All parameters with a * are requried
+</aside>
+
+
+### Response Overview
+
+**`Result Object`**
+
+| Field      | Type      | Description                                                                                               |
+| ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
+| transactionHash     | _string_ | The hash of the transaction (32 characters) |
+| tokenTransfers | [Object] | Returns an array of token transfer objects (definition below) |                              
+| blockNumber     | _intege_ | The block in which the token transfers occured |
+| blockTimestamp | _integer_ | The UNIX timestamp in seconds for when the block was mined |
+
+**`tokenTransfers Object`**
+
+| Field      | Type      | Description                                                                                               |
+| ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
+| from     | _string_ | Address of the sender (20 characters) |
+| to | _string_| Address of the receiver (20 characters) |                              
+| tokenSymbol     | _string_ | Name of the token |
+| tokenContract | _string_ | Address of the token contract string |
+| value | _decimal_ | Value of the tokens transferred|
+| priceUsd | _string_ | Price in USD of the `tokenSymbol` at `blockTimestamp`. Price sourced from Coinbase Pro|
+| logIndex | _integer_ | integer of the transfer events position in the block; useful when there are multiple transfers in one transaction |
+
+
 
 ## Token Balance at Block
 
