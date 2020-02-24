@@ -195,8 +195,8 @@ Note: All parameters with a * are requried
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
 | from     | string | Address of the sender (20 characters) |
 | to | string| Address of the receiver (20 characters) |                              
-| tokenSymbol     | string | Name of the token |
-| tokenContract | string | Address of the token contract string |
+| tokenSymbol     | string | The symbol of the token |
+| tokenContract | string | Address of the token contract (20 characters)|
 | value | decimal | Value of the tokens transferred|
 | transactionHash     | integer | String representing the hash (32 characters) of the transaction |
 | blockNumber     | integer | The block in which the token transfers occured |
@@ -278,8 +278,8 @@ Note: All parameters with a * are requried
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                                                           |
 | from     | _string_ | Address of the sender (20 characters) |
 | to | _string_| Address of the receiver (20 characters) |                              
-| tokenSymbol     | _string_ | Name of the token |
-| tokenContract | _string_ | Address of the token contract string |
+| tokenSymbol     | _string_ | The symbol of the token |
+| tokenContract | _string_ | Address of the token contract (20 characters) |
 | value | _decimal_ | Value of the tokens transferred|
 | priceUsd | _string_ | Price in USD of the `tokenSymbol` at `blockTimestamp`. Price sourced from Coinbase Pro|
 | logIndex | _integer_ | integer of the transfer events position in the block; useful when there are multiple transfers in one transaction |
