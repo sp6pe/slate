@@ -236,10 +236,10 @@
                     <a href="#token-balances" class="toc-h2 toc-link" data-title="Token Balances">Token Balances</a>
                   </li>
                   <li>
-                    <a href="#token-transfers" class="toc-h2 toc-link" data-title="Token Transfers">Token Transfers</a>
+                    <a href="#token-transfers-by-address" class="toc-h2 toc-link" data-title="Token Transfers by Address">Token Transfers by Address</a>
                   </li>
                   <li>
-                    <a href="#token-transfers-by-address" class="toc-h2 toc-link" data-title="Token Transfers by Address">Token Transfers by Address</a>
+                    <a href="#token-transfers-by-transaction-hash" class="toc-h2 toc-link" data-title="Token Transfers by Transaction Hash">Token Transfers by Transaction Hash</a>
                   </li>
                   <li>
                     <a href="#token-balance-at-block" class="toc-h2 toc-link" data-title="Token Balance at Block">Token Balance at Block</a>
@@ -508,7 +508,7 @@ Note: All parameters with a * are requried
 </tr>
 </tbody></table>
 
-<p><strong><code>tokenBlanances Object</code></strong></p>
+<p><strong><code>tokenBalances Object</code></strong></p>
 
 <table><thead>
 <tr>
@@ -531,138 +531,6 @@ Note: All parameters with a * are requried
 <td>priceUsd</td>
 <td><em>string</em></td>
 <td>The market price in USD of the token at the <code>timestamp</code> field in the meta object. Price sourced from Coinbase Pro</td>
-</tr>
-</tbody></table>
-<h2 id='token-transfers'>Token Transfers</h2>
-<p>This endpoint returns the token transfers for a specific transaction hash</p>
-<pre class="highlight shell tab-shell"><code>curl https://eth-mainnet.api.coinbase.com/v1/api_key <span class="se">\</span>
--X POST <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--d <span class="s1">'{"jsonrpc":"2.0","method":"get_tokenTransfersByHash","params":{"transactionHash":"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"},"id":7}'</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> 
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"transactionHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tokenTransfers"</span><span class="p">:</span><span class="w"> 
-      </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w"> 
-          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"tokenSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mkr"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"tokenContract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">223</span><span class="p">,</span><span class="w"> 
-          </span><span class="s2">"logIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"priceUsd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"273.23"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"blockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"blockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"latestBlockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1540474596</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='data-2'>DATA</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>transactionHash *</td>
-<td><em>string</em></td>
-<td>String representing the hash (32 characters) of the transaction</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-Note: All parameters with a * are requried
-</aside>
-<h3 id='response-overview-2'>Response Overview</h3>
-<p><strong><code>Result Object</code></strong></p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>transactionHash</td>
-<td><em>string</em></td>
-<td>The hash of the transaction (32 characters)</td>
-</tr>
-<tr>
-<td>tokenTransfers</td>
-<td>[Object]</td>
-<td>Returns an array of token transfer objects (definition below)</td>
-</tr>
-<tr>
-<td>blockNumber</td>
-<td><em>intege</em></td>
-<td>The block in which the token transfers occured</td>
-</tr>
-<tr>
-<td>blockTimestamp</td>
-<td><em>integer</em></td>
-<td>The UNIX timestamp in seconds for when the block was mined</td>
-</tr>
-</tbody></table>
-
-<p><strong><code>tokenTransfers Object</code></strong></p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>from</td>
-<td><em>string</em></td>
-<td>Address of the sender (20 characters)</td>
-</tr>
-<tr>
-<td>to</td>
-<td><em>string</em></td>
-<td>Address of the receiver (20 characters)</td>
-</tr>
-<tr>
-<td>tokenSymbol</td>
-<td><em>string</em></td>
-<td>Name of the token</td>
-</tr>
-<tr>
-<td>tokenContract</td>
-<td><em>string</em></td>
-<td>Address of the token contract string</td>
-</tr>
-<tr>
-<td>value</td>
-<td><em>decimal</em></td>
-<td>Value of the tokens transferred</td>
-</tr>
-<tr>
-<td>priceUsd</td>
-<td><em>string</em></td>
-<td>Price in USD of the <code>tokenSymbol</code> at <code>blockTimestamp</code>. Price sourced from Coinbase Pro</td>
-</tr>
-<tr>
-<td>logIndex</td>
-<td><em>integer</em></td>
-<td>integer of the transfer events position in the block; useful when there are multiple transfers in one transaction</td>
 </tr>
 </tbody></table>
 <h2 id='token-transfers-by-address'>Token Transfers by Address</h2>
@@ -713,7 +581,7 @@ Note: All parameters with a * are requried
       </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1540474596</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='data-3'>DATA</h3>
+</span></code></pre><h3 id='data-2'>DATA</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -731,7 +599,7 @@ Note: All parameters with a * are requried
 <aside class="notice">
 Note: All parameters with a * are requried
 </aside>
-<h3 id='response-overview-3'>Response Overview</h3>
+<h3 id='response-overview-2'>Response Overview</h3>
 <p><strong><code>Result Object</code></strong></p>
 
 <table><thead>
@@ -806,6 +674,138 @@ Note: All parameters with a * are requried
 <td>priceUsd</td>
 <td><em>string</em></td>
 <td>Price in USD of the <code>tokenSymbol</code> at <code>blockTimestamp</code>. Price sourced from Coinbase Pro</td>
+</tr>
+</tbody></table>
+<h2 id='token-transfers-by-transaction-hash'>Token Transfers by Transaction Hash</h2>
+<p>This endpoint returns the token transfers for a specific transaction hash</p>
+<pre class="highlight shell tab-shell"><code>curl https://eth-mainnet.api.coinbase.com/v1/api_key <span class="se">\</span>
+-X POST <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{"jsonrpc":"2.0","method":"get_tokenTransfersByHash","params":{"transactionHash":"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"},"id":7}'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"transactionHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tokenTransfers"</span><span class="p">:</span><span class="w"> 
+      </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xecA41677558025c76BfD20e9289283cb4Ca85f46"</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x00cFBbaF7DDB3a1476767101c12a0162e241fbAD"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tokenSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mkr"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tokenContract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xf8c35ab8bc40b7bcbf65ae47afc70b1424b5be90"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">223</span><span class="p">,</span><span class="w"> 
+          </span><span class="s2">"logIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"priceUsd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"273.23"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"blockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"blockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"latestBlockNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">7909779</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latestBlockTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559879572</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1540474596</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='data-3'>DATA</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transactionHash *</td>
+<td><em>string</em></td>
+<td>String representing the hash (32 characters) of the transaction</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note: All parameters with a * are requried
+</aside>
+<h3 id='response-overview-3'>Response Overview</h3>
+<p><strong><code>Result Object</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transactionHash</td>
+<td><em>string</em></td>
+<td>The hash of the transaction (32 characters)</td>
+</tr>
+<tr>
+<td>tokenTransfers</td>
+<td>[Object]</td>
+<td>Returns an array of token transfer objects (definition below)</td>
+</tr>
+<tr>
+<td>blockNumber</td>
+<td><em>intege</em></td>
+<td>The block in which the token transfers occured</td>
+</tr>
+<tr>
+<td>blockTimestamp</td>
+<td><em>integer</em></td>
+<td>The UNIX timestamp in seconds for when the block was mined</td>
+</tr>
+</tbody></table>
+
+<p><strong><code>tokenTransfers Object</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>from</td>
+<td><em>string</em></td>
+<td>Address of the sender (20 characters)</td>
+</tr>
+<tr>
+<td>to</td>
+<td><em>string</em></td>
+<td>Address of the receiver (20 characters)</td>
+</tr>
+<tr>
+<td>tokenSymbol</td>
+<td><em>string</em></td>
+<td>Name of the token</td>
+</tr>
+<tr>
+<td>tokenContract</td>
+<td><em>string</em></td>
+<td>Address of the token contract string</td>
+</tr>
+<tr>
+<td>value</td>
+<td><em>decimal</em></td>
+<td>Value of the tokens transferred</td>
+</tr>
+<tr>
+<td>priceUsd</td>
+<td><em>string</em></td>
+<td>Price in USD of the <code>tokenSymbol</code> at <code>blockTimestamp</code>. Price sourced from Coinbase Pro</td>
+</tr>
+<tr>
+<td>logIndex</td>
+<td><em>integer</em></td>
+<td>integer of the transfer events position in the block; useful when there are multiple transfers in one transaction</td>
 </tr>
 </tbody></table>
 <h2 id='token-balance-at-block'>Token Balance at Block</h2><h2 id='token-metadata'>Token Metadata</h2><h2 id='token-allowance'>Token Allowance</h2><h1 id='errors'>Errors</h1>
