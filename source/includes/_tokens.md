@@ -288,6 +288,20 @@ Note: All parameters with a * are requried
 
 ## Token Balance at Block
 
+This endpoint returns the token balance for a specific address at a given block
+
+
+## Token Supply
+
+This endpoint returns the token total supply for a specific token for a given token symbol from the supported [table](#erc20-tokens)  
+
+
 ## Token Metadata
 
+This endpoint returns metadata (name, symbol, contract, decimals, logo) for a given token symbol from the supported [table](#erc20-tokens)
+
+
 ## Token Allowance
+
+This endpoint returns the amount that the spending address is allowed to withdraw from the owner address
+
