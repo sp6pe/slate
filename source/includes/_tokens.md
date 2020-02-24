@@ -212,7 +212,7 @@ This endpoint returns the token transfers for a specific transaction hash
 curl https://eth-mainnet.api.coinbase.com/v1/api_key \
 -X POST \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"get_tokenTransfersByHash","params":{"transactionHash":"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"},"id":7}'
+-d '{"jsonrpc":"2.0","method":"get_tokenTransfersByTxnHash","params":{"transactionHash":"0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"},"id":7}'
 ```
 
 > The above command returns JSON structured like this:
@@ -290,13 +290,32 @@ Note: All parameters with a * are requried
 
 This endpoint returns the token balance for a specific address at a given block
 
+```shell
+curl https://eth-mainnet.api.coinbase.com/v1/api_key \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"get_tokenBalanceByBlock","params":{"address":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", blockNumber:"332","tokenSymbol":"mkr"},"id":7}'
+```
 
 ## Token Supply
 
 This endpoint returns the token total supply for a specific token for a given token symbol from the supported [table](#erc20-tokens)  
 
+```shell
+curl https://eth-mainnet.api.coinbase.com/v1/api_key \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"get_tokenSupply","params":{"tokenSymbol":"mkr"},"id":7}'
+```
 
 ## Token Metadata
+
+```shell
+curl https://eth-mainnet.api.coinbase.com/v1/api_key \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"get_tokenMetadata","params":{"tokenSymbol":"mkr"},"id":7}'
+```
 
 This endpoint returns metadata (name, symbol, contract, decimals, logo) for a given token symbol from the supported [table](#erc20-tokens)
 
