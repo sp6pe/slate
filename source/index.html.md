@@ -11,6 +11,9 @@ toc_footers:
 
 includes:
   - tokens
+  - read_data
+  - construct_transactions
+  - cold_storage_ops
   - errors
 
 
@@ -19,7 +22,7 @@ search: true
 
 # Introduction
 
-Coinbase provides a simple, fast, and reliable **JSON-RPC API** for Ethereum developers. We know it's hard to build on Ethereum, and that's why we've built powerful endpoints that make key tasks trivial 
+Coinbase provides a simple, fast, and reliable **JSON-RPC API** for blockchain developers. We know it's hard to build on blockchains, and that's why we've built powerful endpoints that make key tasks trivial 
 
 This API reference provides information on available endpoints and how to interact with them.
 

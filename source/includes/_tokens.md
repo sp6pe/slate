@@ -1,58 +1,28 @@
-# ERC20 Tokens
+# Supported Assets
 
-The tokens supported for this endpoint are:
+The assets supported for this endpoint are:
 
 | Name                 | Symbol       |
 | -------------------- | ------------ |
-| USD Coin             | `usdc`       |
-| Multi-Collateral Dai | `dai`        |
-| Single-Collateral Dai | `sai`        |
-| Compound Dai | `cdai`        |
+| Bitcoin             | `btc`       |
+| Ethereum | `eth`        |
+| Solana| `sol`        |
+|Polkadot| `dot`        |
 | Maker                 | `mkr`   |
 | Basic Attention Token | `bat`   |
 | OmiseGo               | `omg`   |
-| Synthetix                 | `snx`   |
-| Augur                 | `rep`   |
-| Golem                 | `gnt`   |
-| ZRX                   | `zrx`   |
-| Decentraland          | `mana`  |
-| Numerai               | `nmr`   |
-| Tokencard             | `tkn`   |
-| Bancor                | `bnt`   |
-| Loom Network          | `loom`  |
-| Status                | `snt`   |
-| Civic                 | `cvc`   |
-| Kyber Network         | `knc`   |
-| iExec RLC             | `rlc`   |
-| ChainLink             | `link`  |
-| Fetch.ai.             | `fet`   |
-| Tether               | `usdt_erc20` |
-| Paxos Standard Token | `pax`        |
-| TrueUSD              | `tusd`       |
-| Gemini Dollar        | `gusd`       |
-
-All endpoints in this section return a meta object
-
-**`Meta Object`**
-
-| Field      | Type      | Description                                                                                               |
-| ---------- | --------- | --------------------------------------------------------------------------------------------------------- |                                             
-| latestBlockNumber     | integer | The block number of the latest block as seen by Coinbase |
-| latestBlockTimestamp | integer | The block UNIX timestamp in seconds of the latest block as seen by Coinbase |
-| timestamp | integer | The server UNIX timestamp in seconds when the API request is made |
 
 
+## Asset Definition
 
-## Token Balances
-
-This endpoint returns the token balances for a specific address given a list of tokens.
+This endpoint returns the currency definition for a specific asset
 
 
 ```shell
 curl https://eth-mainnet.api.coinbase.com/v1/API-KEY \
 -X POST \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"get_tokenBalances","params":{"address":"0xecA41677558025c76BfD20e9289283cb4Ca85f46", "tokenSymbols":["mkr", "dai", "zrx"]},"id":7}'
+-d '{"jsonrpc":"2.0","method":"get_assetDefinition","id":7}'
 ```
 
 > The above command returns JSON structured like this:
@@ -63,29 +33,15 @@ curl https://eth-mainnet.api.coinbase.com/v1/API-KEY \
   "id": 7,
   "result": 
     {
-      "address": "0xecA41677558025c76BfD20e9289283cb4Ca85f46",
-      "tokenBalances": 
-      [
-        {"tokenSymbol": "mkr", "tokenBalance": 213, "priceUsd": "617.22"},
-        {"tokenSymbol": "dai", "tokenBalance": 0, "priceUsd": "1.01"},
-        {"tokenSymbol": "zrx","tokenBalance": 323.33, "priceUsd": "0.32"}
-      ],
-    },
-    "meta":{
-      "latestBlockNumber": 7909779,
-      "latestBlockTimestamp": 1559879572,
-      "timestamp": 1540474596
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "decimal_places" :18,
+      "accounting_model":"Account",
+      "destination_tag": false,
     }
 }
 ```
 
-
-### DATA
-
-| Parameter | Type     | Description                                         |
-| --------- | -------- | --------------------------------------------------- |
-| address \*       | _string_ | The address (20 characters) to check for balance                                |
-| tokenSymbols \*    | [_strings_] | Token symbols from the supported [table](#erc20-tokens)          |
 
 <aside class="notice">
 Note: All parameters with a * are requried
@@ -98,20 +54,23 @@ Note: All parameters with a * are requried
 
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- |
-| address     | _string_ | The address for which token balances were checked (20 characters) |
-| tokenBalances | [Object] | Returns an array of token balance objects (definition below)  |           
+| symbol     | _string_ | Symbol of the asset |
+| name | _string_ | Name of the network |           
+| decimal_places | _integer_ | Number of decimals |           
+| accounting_model | _enum_ | UTXO, Account Based, Other |           
+| destination_tag | boolean | returns true if destination tag required |           
 
 
-**`tokenBalances Object`**
+<!-- **`tokenBalances Object`**
 
 | Field      | Type      | Description                                                                                               |
 | ---------- | --------- | --------------------------------------------------------------------------------------------------------- 
 | tokenSymbol     | _string_ | The symbol of the token |
 | tokenBalance | _decimal_ | The decoded balance of the token in the `address`. `0` if no balance | 
 | priceUsd | _string_ | The market price in USD of the token at the `timestamp` field in the meta object. Price sourced from Coinbase Pro |       
+ -->
 
-
-## Token Transfers by Address
+<!-- ## Token Transfers by Address
 
 This endpoint returns the token transfers for a specific address
 
@@ -246,11 +205,11 @@ curl https://eth-mainnet.api.coinbase.com/v1/api_key \
     }
 }
 ```
+ -->
 
 
 
-
-### DATA
+<!-- ### DATA
 
 | Parameter | Type     | Description                                         |
 | --------- | -------- | --------------------------------------------------- |
@@ -323,4 +282,4 @@ This endpoint returns metadata (name, symbol, contract, decimals, logo) for a gi
 ## Token Allowance
 
 This endpoint returns the amount that the spending address is allowed to withdraw from the owner address
-
+ -->
